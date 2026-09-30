@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@source '../../app/Livewire/**/*.php';
+@source '../../resources/views/**/*.blade.php';
+@source '../../vendor/livewire/livewire/src/**/*.blade.php';
+
+@theme {
+    /* VELORA palette — fixed by the brand guide */
+    --color-sand-50:  #FFFFFF;   /* cards */
+    --color-sand-100: #F7F4EF;   /* page background */
+    --color-sand-200: #EFEAE2;
+    --color-sand-300: #E3DACE;
+    --color-clay-400: #D8C8B8;   /* accent */
+    --color-clay-500: #C3AE99;
+    --color-taupe-500: #8A7F72;
+    --color-ink-400: #777777;    /* secondary text */
+    --color-ink-600: #3A3A3A;
+    --color-ink-900: #1C1C1C;    /* primary */
+
+    --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-editorial: 'Newsreader', ui-serif, Georgia, serif;
+
+    --radius-card: 0.375rem;
+}
+
+@layer base {
+    [x-cloak] { display: none !important; }
+
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+    body { @apply bg-sand-100 text-ink-900 font-sans antialiased; }
+
+    :focus-visible { @apply outline-2 outline-offset-2 outline-ink-900; }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@layer components {
+    /* Tailwind v4 does not let @apply reference another custom class, so the
+       shared button utilities are spelled out on every variant instead of
+       being chained through a single .btn base class. */
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium
+               transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed
+               bg-ink-900 text-white hover:bg-ink-600;
+    }
+    .btn-outline {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium
+               transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed
+               border border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white;
+    }
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium
+               transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed
+               text-ink-600 hover:text-ink-900;
+    }
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium
+               transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+    }
+
+    .field {
+        @apply w-full border border-sand-300 bg-white px-4 py-3 text-sm text-ink-900
+               placeholder:text-ink-400 focus:border-ink-900 focus:ring-0;
+    }
+
+    .card { @apply bg-white rounded-card; }
+
+    .chip {
+        @apply inline-flex items-center px-3 py-1 text-xs tracking-wide border border-sand-300
+               text-ink-600 transition-colors hover:border-ink-900 hover:text-ink-900;
+    }
+}
